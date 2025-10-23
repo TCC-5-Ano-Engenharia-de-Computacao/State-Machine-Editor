@@ -7,15 +7,20 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { StateMachineProvider } from "./contexts/StateMachineContext";
 import { IndexProvider } from "./contexts/IndexContext";
 import Editor from "./pages/Editor";
+import { BrowserRouter } from 'react-router-dom';
+
+const BASE_PATH = "/State-Machine-Editor";
 
 function Router() {
   return (
-    <Switch>
-      <Route path={"/"} component={Editor} />
-      <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
-      <Route component={NotFound} />
-    </Switch>
+    <BrowserRouter basename={BASE_PATH}>
+      <Switch>
+        <Route path={"/"} component={Editor} />
+        <Route path={"/404"} component={NotFound} />
+        {/* Final fallback route */}
+        <Route component={NotFound} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 

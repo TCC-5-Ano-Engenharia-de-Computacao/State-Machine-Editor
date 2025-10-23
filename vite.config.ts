@@ -8,7 +8,7 @@ const plugins = [react(), tailwindcss(), jsxLocPlugin()];
 
 export default defineConfig(({ mode }) => ({
   plugins,
-  base: mode === 'production' ? '/state-machine-editor/' : '/',
+  base: mode === 'production' ? '/State-Machine-Editor/' : '/',
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),
