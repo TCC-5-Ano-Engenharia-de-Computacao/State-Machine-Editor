@@ -17,6 +17,7 @@ const parserOptions = {
   preserveOrder: false,
   parseAttributeValue: false,
   trimValues: true,
+  allowBooleanAttributes: true, // Preservar atributos booleanos sem valor (ex: isInstantaneous)
 };
 
 const builderOptions = {
@@ -25,6 +26,7 @@ const builderOptions = {
   format: true,
   indentBy: '    ',
   suppressEmptyNode: true,
+  suppressBooleanAttributes: false, // Forçar valores explícitos para atributos booleanos
 };
 
 function generateId(): string {
@@ -49,7 +51,12 @@ function parseActions(actionsObj: any): ActionElement[] {
         for (const [key, value] of Object.entries(action)) {
           if (key.startsWith('@_')) {
             const attrName = key.substring(2);
-            attributes[attrName] = String(value);
+            // Se valor for vazio ou true (atributo booleano sem valor), usar "true"
+            if (value === '' || value === true) {
+              attributes[attrName] = 'true';
+            } else {
+              attributes[attrName] = String(value);
+            }
           }
         }
       }
@@ -81,7 +88,12 @@ function parseConditions(conditionsObj: any): ConditionElement[] {
         for (const [key, value] of Object.entries(condition)) {
           if (key.startsWith('@_')) {
             const attrName = key.substring(2);
-            attributes[attrName] = String(value);
+            // Se valor for vazio ou true (atributo booleano sem valor), usar "true"
+            if (value === '' || value === true) {
+              attributes[attrName] = 'true';
+            } else {
+              attributes[attrName] = String(value);
+            }
           }
         }
       }
@@ -166,7 +178,10 @@ function buildActions(actions: ActionElement[]): any {
     const actionObj: any = {};
     
     for (const [key, value] of Object.entries(action.attributes)) {
-      actionObj[`@_${key}`] = (typeof value === 'boolean') ? String(value) : value;;
+      // Apenas adicionar atributo se tiver valor não vazio
+      if (value !== undefined && value !== null && value !== '') {
+        actionObj[`@_${key}`] = value;
+      }
     }
     
     if (!result[action.name]) {
@@ -190,7 +205,10 @@ function buildConditions(conditions: ConditionElement[]): any {
     const conditionObj: any = {};
     
     for (const [key, value] of Object.entries(condition.attributes)) {
-      conditionObj[`@_${key}`] = (typeof value === 'boolean') ? String(value) : value;
+      // Apenas adicionar atributo se tiver valor não vazio
+      if (value !== undefined && value !== null && value !== '') {
+        conditionObj[`@_${key}`] = value;
+      }
     }
     
     if (!result[condition.name]) {

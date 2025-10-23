@@ -81,9 +81,13 @@ export default function ActionEditor({
   
   const addAttribute = (key: string) => {
     if (editingAction && key.trim()) {
+      // Obter valor padrão sugerido do índice
+      const valueSuggestions = getAttributeValueSuggestions('action', editingAction.name, key.trim());
+      const defaultValue = valueSuggestions.length > 0 ? valueSuggestions[0] : '';
+      
       setEditingAction({
         ...editingAction,
-        attributes: { ...editingAction.attributes, [key.trim()]: '' },
+        attributes: { ...editingAction.attributes, [key.trim()]: defaultValue },
       });
       setNewAttrKey('');
     }

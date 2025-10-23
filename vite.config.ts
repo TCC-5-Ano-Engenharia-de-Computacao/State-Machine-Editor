@@ -6,9 +6,9 @@ import { defineConfig } from "vite";
 
 const plugins = [react(), tailwindcss(), jsxLocPlugin()];
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins,
-  base: '/State-Machine-Editor/',
+  base: mode === 'production' ? '/state-machine-editor/' : '/',
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),
@@ -35,4 +35,4 @@ export default defineConfig({
       deny: ["**/.*"],
     },
   },
-});
+}));

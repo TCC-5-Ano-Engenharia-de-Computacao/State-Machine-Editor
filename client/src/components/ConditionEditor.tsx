@@ -79,9 +79,13 @@ export default function ConditionEditor({
   
   const addAttribute = (key: string) => {
     if (editingCondition && key.trim()) {
+      // Obter valor padrão sugerido do índice
+      const valueSuggestions = getAttributeValueSuggestions('condition', editingCondition.name, key.trim());
+      const defaultValue = valueSuggestions.length > 0 ? valueSuggestions[0] : '';
+      
       setEditingCondition({
         ...editingCondition,
-        attributes: { ...editingCondition.attributes, [key.trim()]: '' },
+        attributes: { ...editingCondition.attributes, [key.trim()]: defaultValue },
       });
       setNewAttrKey('');
     }
