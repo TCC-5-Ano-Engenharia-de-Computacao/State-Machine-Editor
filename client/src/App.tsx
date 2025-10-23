@@ -1,25 +1,23 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { StateMachineProvider } from "./contexts/StateMachineContext";
 import { IndexProvider } from "./contexts/IndexContext";
 import Editor from "./pages/Editor";
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 const BASE_PATH = "/State-Machine-Editor";
 
 function Router() {
   return (
     <BrowserRouter basename={BASE_PATH}>
-      <Switch>
-        <Route path={"/"} component={Editor} />
-        <Route path={"/404"} component={NotFound} />
-        {/* Final fallback route */}
-        <Route component={NotFound} />
-      </Switch>
+      <Routes>
+        <Route path="/" element={<Editor />} />
+        <Route path="/404" element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </BrowserRouter>
   );
 }
