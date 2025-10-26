@@ -44,7 +44,7 @@ export default function StateListView() {
         </div>
       </div>
       
-      <ScrollArea className="flex-1">
+      <ScrollArea className="flex-1  overflow-y-auto">
         <div className="px-4 pb-4 space-y-2">
           {filteredStates.length === 0 ? (
             <div className="text-center text-muted-foreground py-8">
