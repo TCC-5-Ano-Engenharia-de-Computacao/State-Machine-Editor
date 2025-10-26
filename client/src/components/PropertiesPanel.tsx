@@ -170,8 +170,8 @@ export default function PropertiesPanel() {
               <TabsTrigger value="onStay" className="text-xs">
                 OnStay
               </TabsTrigger>
-              <TabsTrigger value="onExit" className="text-xs">
-                OnExit
+              <TabsTrigger value="onLeave" className="text-xs">
+                OnLeave
               </TabsTrigger>
             </TabsList>
             
@@ -229,20 +229,20 @@ export default function PropertiesPanel() {
               />
             </TabsContent>
             
-            <TabsContent value="onExit" className="mt-4">
+            <TabsContent value="onLeave" className="mt-4">
               <ActionEditor
-                actions={selectedState.events.onExit}
+                actions={selectedState.events.onLeave}
                 onAdd={(action: ActionElement) =>
-                  addAction(selectedStateId, 'onExit', action)
+                  addAction(selectedStateId, 'onLeave', action)
                 }
                 onUpdate={(index: number, action: ActionElement) =>
-                  updateAction(selectedStateId, 'onExit', index, action)
+                  updateAction(selectedStateId, 'onLeave', index, action)
                 }
                 onDelete={(index: number) =>
-                  deleteAction(selectedStateId, 'onExit', index)
+                  deleteAction(selectedStateId, 'onLeave', index)
                 }
                 onReorder={(from: number, to: number) =>
-                  reorderActions(selectedStateId, 'onExit', from, to)
+                  reorderActions(selectedStateId, 'onLeave', from, to)
                 }
               />
             </TabsContent>

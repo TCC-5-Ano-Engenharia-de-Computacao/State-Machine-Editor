@@ -22,7 +22,7 @@ export interface StateEvents {
   beforeEnter: ActionElement[];
   onEnter: ActionElement[];
   onStay: ActionElement[];
-  onExit: ActionElement[];
+  onLeave: ActionElement[];
 }
 
 export interface State {

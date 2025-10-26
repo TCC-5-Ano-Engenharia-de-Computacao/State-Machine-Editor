@@ -24,10 +24,10 @@ interface StateMachineContextType {
   setInitialState: (stateId: string) => void;
   
   // State events operations
-  addAction: (stateId: string, eventType: 'beforeEnter' | 'onEnter' | 'onStay' | 'onExit', action: ActionElement) => void;
-  updateAction: (stateId: string, eventType: 'beforeEnter' | 'onEnter' | 'onStay' | 'onExit', index: number, action: ActionElement) => void;
-  deleteAction: (stateId: string, eventType: 'beforeEnter' | 'onEnter' | 'onStay' | 'onExit', index: number) => void;
-  reorderActions: (stateId: string, eventType: 'beforeEnter' | 'onEnter' | 'onStay' | 'onExit', fromIndex: number, toIndex: number) => void;
+  addAction: (stateId: string, eventType: 'beforeEnter' | 'onEnter' | 'onStay' | 'onLeave', action: ActionElement) => void;
+  updateAction: (stateId: string, eventType: 'beforeEnter' | 'onEnter' | 'onStay' | 'onLeave', index: number, action: ActionElement) => void;
+  deleteAction: (stateId: string, eventType: 'beforeEnter' | 'onEnter' | 'onStay' | 'onLeave', index: number) => void;
+  reorderActions: (stateId: string, eventType: 'beforeEnter' | 'onEnter' | 'onStay' | 'onLeave', fromIndex: number, toIndex: number) => void;
   
   // Transition operations
   addTransition: (fromStateId: string, toStateId: string) => string;
@@ -89,7 +89,7 @@ export function StateMachineProvider({ children }: { children: React.ReactNode }
           beforeEnter: [],
           onEnter: [],
           onStay: [],
-          onExit: [],
+          onLeave: [],
         },
         transitions: [],
       };
@@ -164,7 +164,7 @@ export function StateMachineProvider({ children }: { children: React.ReactNode }
   
   const addAction = useCallback((
     stateId: string,
-    eventType: 'beforeEnter' | 'onEnter' | 'onStay' | 'onExit',
+    eventType: 'beforeEnter' | 'onEnter' | 'onStay' | 'onLeave',
     action: ActionElement
   ) => {
     setStateMachine((prev) => {
@@ -189,7 +189,7 @@ export function StateMachineProvider({ children }: { children: React.ReactNode }
   
   const updateAction = useCallback((
     stateId: string,
-    eventType: 'beforeEnter' | 'onEnter' | 'onStay' | 'onExit',
+    eventType: 'beforeEnter' | 'onEnter' | 'onStay' | 'onLeave',
     index: number,
     action: ActionElement
   ) => {
@@ -217,7 +217,7 @@ export function StateMachineProvider({ children }: { children: React.ReactNode }
   
   const deleteAction = useCallback((
     stateId: string,
-    eventType: 'beforeEnter' | 'onEnter' | 'onStay' | 'onExit',
+    eventType: 'beforeEnter' | 'onEnter' | 'onStay' | 'onLeave',
     index: number
   ) => {
     setStateMachine((prev) => {
@@ -243,7 +243,7 @@ export function StateMachineProvider({ children }: { children: React.ReactNode }
   
   const reorderActions = useCallback((
     stateId: string,
-    eventType: 'beforeEnter' | 'onEnter' | 'onStay' | 'onExit',
+    eventType: 'beforeEnter' | 'onEnter' | 'onStay' | 'onLeave',
     fromIndex: number,
     toIndex: number
   ) => {

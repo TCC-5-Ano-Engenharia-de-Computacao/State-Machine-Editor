@@ -136,7 +136,7 @@ function parseStateEvents(stateObj: any): StateEvents {
     beforeEnter: parseActions(stateObj.BeforeEnter),
     onEnter: parseActions(stateObj.OnEnter),
     onStay: parseActions(stateObj.OnStay),
-    onExit: parseActions(stateObj.OnExit),
+    onLeave: parseActions(stateObj.OnLeave),
   };
 }
 
@@ -266,8 +266,8 @@ function buildStateEvents(events: StateEvents): any {
   const onStay = buildActions(events.onStay);
   if (onStay) result.OnStay = onStay;
   
-  const onExit = buildActions(events.onExit);
-  if (onExit) result.OnExit = onExit;
+  const onLeave = buildActions(events.onLeave);
+  if (onLeave) result.OnLeave = onLeave;
   
   return result;
 }

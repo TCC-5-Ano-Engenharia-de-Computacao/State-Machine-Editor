@@ -40,7 +40,7 @@ Selecione um estado no grafo para editar suas propriedades:
   - **BeforeEnter**: Executado antes de entrar no estado
   - **OnEnter**: Executado ao entrar no estado
   - **OnStay**: Executado enquanto permanece no estado
-  - **OnExit**: Executado ao sair do estado
+  - **OnLeave**: Executado ao sair do estado
 
 #### Editar Ações
 
@@ -107,7 +107,7 @@ O editor mantém a estrutura XML compatível com seu parser do Unity:
     </BeforeEnter>
     <OnEnter>...</OnEnter>
     <OnStay>...</OnStay>
-    <OnExit>...</OnExit>
+    <OnLeave>...</OnLeave>
     <Transitions>
       <Transition to="Jump">
         <Conditions>

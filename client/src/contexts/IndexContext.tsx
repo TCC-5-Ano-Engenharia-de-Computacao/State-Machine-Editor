@@ -80,7 +80,7 @@ export function IndexProvider({ children }: { children: React.ReactNode }) {
       for (const action of state.events.beforeEnter) indexAction(action);
       for (const action of state.events.onEnter) indexAction(action);
       for (const action of state.events.onStay) indexAction(action);
-      for (const action of state.events.onExit) indexAction(action);
+      for (const action of state.events.onLeave) indexAction(action);
       
       // Index transition conditions and actions
       for (const transition of state.transitions) {

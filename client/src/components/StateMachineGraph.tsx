@@ -199,7 +199,7 @@ export default function StateMachineGraph() {
             state.events.beforeEnter.length +
             state.events.onEnter.length +
             state.events.onStay.length +
-            state.events.onExit.length,
+            state.events.onLeave.length,
           isDimmed: false,
           handles: stateHandles.get(state.id),
         },

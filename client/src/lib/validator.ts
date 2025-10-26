@@ -122,7 +122,7 @@ export function validateStateMachine(stateMachine: StateMachine): ValidationErro
     }
     
     // Check state events for empty action names
-    const eventTypes = ['beforeEnter', 'onEnter', 'onStay', 'onExit'] as const;
+    const eventTypes = ['beforeEnter', 'onEnter', 'onStay', 'onLeave'] as const;
     for (const eventType of eventTypes) {
       for (const action of state.events[eventType]) {
         if (!action.name || action.name.trim() === '') {
