@@ -54,11 +54,23 @@ export default function ConditionEditor({
     setEditingCondition(null);
   };
   
+  const buildDefaultAttributesForCondition = (conditionName: string): Record<string, string> => {
+    const attrs = getAttributeSuggestions('condition', conditionName) || [];
+    const attributes: Record<string, string> = {};
+    for (const key of attrs) {
+      const valueSuggestions = getAttributeValueSuggestions('condition', conditionName, key) || [];
+      attributes[key] = valueSuggestions.length > 0 ? valueSuggestions[0] : '';
+    }
+    return attributes;
+  };
+  
   const addNewCondition = () => {
     if (newConditionName.trim()) {
+      const conditionName = newConditionName.trim();
+      const attributes = buildDefaultAttributesForCondition(conditionName);
       onAdd({
-        name: newConditionName.trim(),
-        attributes: {},
+        name: conditionName,
+        attributes,
       });
       setNewConditionName('');
       setShowAddForm(false);
