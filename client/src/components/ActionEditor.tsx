@@ -56,11 +56,23 @@ export default function ActionEditor({
     setEditingAction(null);
   };
   
+  const buildDefaultAttributesForAction = (actionName: string): Record<string, string> => {
+    const attrs = getAttributeSuggestions('action', actionName) || [];
+    const attributes: Record<string, string> = {};
+    for (const key of attrs) {
+      const valueSuggestions = getAttributeValueSuggestions('action', actionName, key) || [];
+      attributes[key] = valueSuggestions.length > 0 ? valueSuggestions[0] : '';
+    }
+    return attributes;
+  };
+  
   const addNewAction = () => {
     if (newActionName.trim()) {
+      const actionName = newActionName.trim();
+      const attributes = buildDefaultAttributesForAction(actionName);
       onAdd({
-        name: newActionName.trim(),
-        attributes: {},
+        name: actionName,
+        attributes,
       });
       setNewActionName('');
       setShowAddForm(false);
